@@ -19,17 +19,17 @@ class ThreadSafeInstance {
 }
 
 public class App {
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) {
         int x = Runtime.getRuntime().availableProcessors();
         System.out.println(x);
 
 
-        ExecutorService executors = Executors.newFixedThreadPool(2);
+        ExecutorService executors = Executors.newFixedThreadPool(4);
         for(int i=0; i<1000; i++){
             int id = i;
             executors.execute(() ->{
                 SimpleDateFormat date = new App().dateofBirth(id);
-                    System.out.println(Thread.currentThread().getId()+" is at "+date);
+                System.out.println(Thread.currentThread().getId()+" is at "+date);
             });
         }
         executors.shutdown();
@@ -44,7 +44,7 @@ public class App {
 
     public SimpleDateFormat dateofBirth(int id) {
         ThreadSafeInstance tsf = new ThreadSafeInstance();
-        final SimpleDateFormat df = tsf.threadsafe.get();
+        SimpleDateFormat df = tsf.threadsafe.get();
         return df;
     }
 }

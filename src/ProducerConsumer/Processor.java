@@ -1,6 +1,5 @@
 package ProducerConsumer;
 
-import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
